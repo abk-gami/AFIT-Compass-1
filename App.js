@@ -1,5 +1,4 @@
-
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import {
   AppRegistry,
   StyleSheet,
@@ -10,38 +9,44 @@ import {
   Image,
   Dimensions,
   TouchableOpacity,
+  Button,
 } from "react-native";
+
+import * as Location from 'expo-location';
 
 import MapView, {PROVIDER_GOOGLE, Marker}  from 'react-native-maps';
 
 const Images = [
-  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/afit gate.jpg?raw=true" },
   { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/hq.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/yisa doko.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/alpha hall.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/afit img.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/hall a.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/souvenir shop.jpg?raw=true" },
   { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
   { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
-  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
-  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/girls hostel.jpg?raw=true" },
+  { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/boys hostel.jpg?raw=true" },
   { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/mark.jpg?raw=true" },
 ];
 
 const { width, height } = Dimensions.get("window");
 
 const CARD_HEIGHT = 220;
-const CARD_WIDTH = width * 0.9;
-const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
+const CARD_WIDTH = width * 0.65;
+const SPACING_FOR_CARD_INSET = width * 0.03 - 10;
+
+
 
 export default class ExploreScreen extends Component {
+
+
+  
   state = {
     markers: [
-      {
-        coordinate: {
-          latitude: 10.608173,
-          longitude:   7.439115,
-        },
-        title: 'AFIT Gate',
-        description: 'Make sure you hold your I.D card',
-        image: Images[0],
-      },
       {
         coordinate: {
           latitude: 10.607917, 
@@ -50,6 +55,15 @@ export default class ExploreScreen extends Component {
         title: 'AFIT HeadQuarters',
         description: 'No near here if you no dey wear shoe!!',
         image: Images[1],
+      },
+      {
+        coordinate: {
+          latitude: 10.608173,
+          longitude:   7.439115,
+        },
+        title: 'AFIT Gate',
+        description: 'Make sure you hold your I.D card',
+        image: Images[0],
       },
       {
         coordinate: {
@@ -66,7 +80,7 @@ export default class ExploreScreen extends Component {
           longitude:    7.443825,
         },
         title: 'Ibrahim Alfa Auditorium',
-        description: 'Una dey call am Alfa Hall',
+        description: 'Alfa Hall',
         image: Images[3],
       },
       {
@@ -87,22 +101,31 @@ export default class ExploreScreen extends Component {
         description: 'Just pray you no go write test for here!!',
         image: Images[5],
       },
+      // {
+      //   coordinate: {
+      //     latitude:    10.612020, 
+      //     longitude:    7.440003,
+      //   },
+      //   title: 'LR C1',
+      //   description: 'Hall C1',
+      //   image: Images[6],
+      // },
+      // {
+      //   coordinate: {
+      //     latitude:     10.611956, 
+      //     longitude:    7.439829,
+      //   },
+      //   title: 'LR C2',
+      //   description: 'Hall C2',
+      //   image: Images[6],
+      // },
       {
         coordinate: {
-          latitude:    10.612020, 
-          longitude:    7.440003,
+          latitude:     10.611440, 
+          longitude:    7.44000,
         },
-        title: 'LR C1',
-        description: 'Hall C1',
-        image: Images[6],
-      },
-      {
-        coordinate: {
-          latitude:     10.611956, 
-          longitude:    7.439829,
-        },
-        title: 'LR C2',
-        description: 'Hall C2',
+        title: 'Engineering Drawing Studio',
+        description: 'Hall A',
         image: Images[6],
       },
       {
@@ -112,7 +135,7 @@ export default class ExploreScreen extends Component {
         },
         title: 'I.O Amao Hall',
         description: 'Amao hall',
-        image: Images[6],
+        image: Images[7],
       },
       {
         coordinate: {
@@ -120,8 +143,8 @@ export default class ExploreScreen extends Component {
           longitude:    7.441011,
         },
         title: 'Souvenir Shop',
-        description: '......',
-        image: Images[6],
+        description: 'Where items are being sold',
+        image: Images[8],
       },
       {
         coordinate: {
@@ -129,8 +152,8 @@ export default class ExploreScreen extends Component {
           longitude:    7.444500 ,
         },
         title: 'Bush Canteen',
-        description: '......',
-        image: Images[6],
+        description: 'Food and items are sold here too',
+        image: Images[9],
       },
       {
         coordinate: {
@@ -138,28 +161,111 @@ export default class ExploreScreen extends Component {
           longitude:    7.445999, 
         },
         title: 'AFIT Clinic',
-        description: '......',
-        image: Images[6],
+        description: 'Sick Bay for ill students',
+        image: Images[10],
       },
+      {
+        coordinate: {
+          latitude:     10.613283, 
+          longitude:    7.447779, 
+        },
+        title: 'Girls Hostel',
+        description: 'Girls Hostel',
+        image: Images[11],
+      },
+      // {
+      //   coordinate: {
+      //     latitude:     10.618057,  
+      //     longitude:    7.444011, 
+      //   },
+      //   title: 'Basket Ball Court',
+      //   description: 'B-Ball court in boys hostel',
+      //   image: Images[6],
+      // },
+      {
+        coordinate: {
+          latitude:    10.617776, 
+          longitude:    7.443347,  
+        },
+        title: 'Boys Hostel',
+        description: 'Boys Hostel',
+        image: Images[12],
+      },
+      // {
+      //   coordinate: {
+      //     latitude:    10.617766,  
+      //     longitude:    7.443017,  
+      //   },
+      //   title: 'Storey Building',
+      //   description: 'Poultry Hostel',
+      //   image: Images[6],
+      // },
+      // {
+      //   coordinate: {
+      //     latitude:    10.618459,  
+      //     longitude:    7.444763,   
+      //   },
+      //   title: 'NAFIL',
+      //   description: 'Boys Hostel',
+      //   image: Images[6],
+      // },
+      // {
+      //   coordinate: {
+      //     latitude:    10.618380,   
+      //     longitude:    7.443523,   
+      //   },
+      //   title: 'Bungalow Hostel',
+      //   description: 'Trenches',
+      //   image: Images[6],
+      // },
+      // {
+      //   coordinate: {
+      //     latitude:   10.618285,    
+      //     longitude:    7.444707,   
+      //   },
+      //   title: 'NAFIL Canteen',
+      //   description: 'Boys hostel canteen',
+      //   image: Images[13],
+      // },
+
+
     ],
     region: {
-      latitude: 10.608173,
-      longitude:   7.439115,
+      latitude: 10.607917, 
+      longitude:  7.441819,
       latitudeDelta: 0.00001,
       longitudeDelta: 0.002131,
     },
   };
 
-  componentWillMount() {
+    
+
+
+  UNSAFE_componentWillMount() {
     this.index = 0;
     this.animation = new Animated.Value(0);
   }
-
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     location: null,
+  //   };
+  // }
   componentDidMount() {
+      // Request the user's location permissions.
+      // Location.requestForegroundPermissionsAsync().then(response => {
+      //   // Check if the user granted the permissions.
+      //   if (response.status === "granted") {
+      //     // Get the user's current location.
+      //     Location.getCurrentPositionAsync().then(position => {
+      //       this.setState({ location: position });
+      //     });
+      //   }
+      // });
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
-      let index = Math.floor(value / CARD_WIDTH + 0.3); // animate 30% away from landing on the next item
+      let index = Math.floor(value / CARD_WIDTH + 0.23); // animate 30% away from landing on the next item
       if (index >= this.state.markers.length) {
         index = this.state.markers.length - 1;
       }
@@ -185,6 +291,7 @@ export default class ExploreScreen extends Component {
     });
   }
 
+  
   render(){
 
     const interpolations = this.state.markers.map((marker, index) => {
@@ -195,7 +302,7 @@ export default class ExploreScreen extends Component {
       ];
       const scale = this.animation.interpolate({
         inputRange,
-        outputRange: [1, 2.5, 1],
+        outputRange: [2, 2.5, 1.5],
         extrapolate: "clamp",
       });
       const opacity = this.animation.interpolate({
@@ -205,8 +312,56 @@ export default class ExploreScreen extends Component {
       });
       return { scale, opacity };
     });
-    return <View style={styles.container}>
+    
+
+    // const userLocation = async () => {
+    //   let { status } = await Location.requestForegroundPermissionsAsync();
+    //   if (status != 'granted'){
+    //      setErrorMsg('Permission to access location was denied');
+    //   }
+    //   let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
+    //   setMapRegion({
+    //     latitude: location.coords.latitude,
+    //     longitude: location.coords.longitude,
+    //     latitudeDelta: 0.015,
+    //     longitudeDelta: 0.0121,
+    //   });
+    //   console.log(location.coords.latitude, location.coords.longitude);
+    // }
+    
+    
+    // useEffect(() => {
+    //   userLocation();
+    // }, []);
+
+    // const [location, setLocation] = useState(null);
+    // const [errorMsg, setErrorMsg] = useState(null);
+  
+    // useEffect(() => {
+    //   (async () => {
+        
+    //     let { status } = await Location.requestForegroundPermissionsAsync();
+    //     if (status !== 'granted') {
+    //       setErrorMsg('Permission to access location was denied');
+    //       return;
+    //     }
+  
+    //     let location = await Location.getCurrentPositionAsync({});
+    //     setLocation(location);
+    //   })();
+    // }, []);
+  
+    // let text = 'Waiting..';
+    // if (errorMsg) {
+    //   text = errorMsg;
+    // } else if (location) {
+    //   text = JSON.stringify(location);
+    // }
+    
+    return ( 
+    <View style={styles.container}>
       {/* <Text>Hello World</Text> */}
+      {/* <Button title='get Location' onPress={userLocation} style={styles.button}/> */}
       <MapView
   ref={(map) => (this.map = map)}
   initialRegion={this.state.region}
@@ -214,6 +369,13 @@ export default class ExploreScreen extends Component {
   mapType={'satellite'} 
   provider={PROVIDER_GOOGLE}
 >
+  {
+    this.state.location && (
+      <Text style={styles.write}>
+        The user's location is: {this.state.location.latitude}, {this.state.location.longitude} 
+      </Text>
+    )
+  }
 {
   this.state.markers.map((marker, index) => {
     const scaleStyle = {
@@ -241,9 +403,18 @@ export default class ExploreScreen extends Component {
 </MapView>
 <Animated.ScrollView
   horizontal
+  pagingEnabled
   scrollEventThrottle={1}
   showsHorizontalScrollIndicator={false}
-  snapToInterval={CARD_WIDTH}
+  snapToInterval={CARD_WIDTH + 20}
+  contentContainerStyle={styles.endPadding}
+  snapToAlignment="center"
+  contentInset={{
+    top: 0,
+    left: SPACING_FOR_CARD_INSET  ,
+    bottom: 0,
+    right: SPACING_FOR_CARD_INSET ,
+  }}
   onScroll={Animated.event(
     [
       {
@@ -257,8 +428,10 @@ export default class ExploreScreen extends Component {
     { useNativeDriver: true }
   )}
   style={styles.scrollView}
-  contentContainerStyle={styles.endPadding}
->
+ >
+   {/* contentContainerStyle={{
+    paddingHorizontal: Platform.OS === 'android' ? SPACING_FOR_CARD_INSET : 0
+  }} */}
 {
   this.state.markers.map((marker, index) => (
     <View style={styles.card} key={index}>
@@ -280,15 +453,22 @@ export default class ExploreScreen extends Component {
 }
 </Animated.ScrollView>
     </View>
-    
+    )
   }
 };
+
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginTop: 10,
+    // marginTop: 45,
     backgroundColor: '#0a005b',
+    paddingTop: 45,
+  },
+  write: {
+    flex: 1,
+    height: 100,
+    marginTop: 60,
   },
   scrollView: {
     position: "absolute",
@@ -296,7 +476,10 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     paddingVertical: 10,
-    // paddingLeft: 90,
+    paddingLeft: 20,
+  },
+  button: {
+    flex: 1,
   },
   endPadding: {
     paddingRight: width - CARD_WIDTH,
@@ -305,13 +488,17 @@ const styles = StyleSheet.create({
     padding: 10,
     elevation: 2,
     backgroundColor: "#fff",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
     marginHorizontal: 10,
+    // marginRight: 10,
+    // marginLeft: 10,
     shadowColor: "#000",
     shadowRadius: 5,
     shadowOpacity: 0.3,
     shadowOffset: { x: 2, y: -2 },
     height: CARD_HEIGHT,
-    width: CARD_WIDTH,
+    width: CARD_WIDTH ,
     overflow: "hidden",
   },
   cardImage: {
@@ -342,11 +529,12 @@ const styles = StyleSheet.create({
     width: 8,
     height: 8,
     borderRadius: 4,
-    backgroundColor: "rgba(130,4,150, 0.9)",
+    // backgroundColor: "rgba(130,4,150, 0.9)",
+    backgroundColor: "red",
   },
   ring: {
-    width: 24,
-    height: 24,
+    width: 34,
+    height: 34,
     borderRadius: 12,
     backgroundColor: "rgba(130,4,150, 0.3)",
     position: "absolute",
@@ -354,3 +542,4 @@ const styles = StyleSheet.create({
     borderColor: "rgba(130,4,150, 0.5)",
   },
 });
+// export default ExploreScreen;
