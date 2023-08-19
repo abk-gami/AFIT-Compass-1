@@ -1,15 +1,11 @@
 import React, { Component, useEffect, useState } from "react";
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
-  ScrollView,
   Animated,
   Image,
   Dimensions,
-  TouchableOpacity,
-  Button,
 } from "react-native";
 
 
