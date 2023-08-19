@@ -181,7 +181,7 @@ export default class MapScreen extends Component {
       //   description: 'B-Ball court in boys hostel',
       //   image: Images[6],
       // },
-      {
+      { 
         coordinate: {
           latitude:    10.617776, 
           longitude:    7.443347,  
@@ -459,7 +459,7 @@ export default class MapScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 2,
     // marginTop: 45,
     backgroundColor: '#0a005b',
     paddingTop: 45,
