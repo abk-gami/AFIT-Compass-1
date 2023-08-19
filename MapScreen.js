@@ -1,11 +1,15 @@
 import React, { Component, useEffect, useState } from "react";
 import {
+  AppRegistry,
   StyleSheet,
   Text,
   View,
+  ScrollView,
   Animated,
   Image,
   Dimensions,
+  TouchableOpacity,
+  Button,
 } from "react-native";
 
 
@@ -309,13 +313,13 @@ export default class MapScreen extends Component {
   mapType={'satellite'} 
   provider={PROVIDER_GOOGLE}
 >
-  {
+  {/* {
     this.state.location && (
       <Text style={styles.write}>
         The user's location is: {this.state.location.latitude}, {this.state.location.longitude} 
       </Text>
     )
-  }
+  } */}
 {
   this.state.markers.map((marker, index) => {
     const scaleStyle = {
