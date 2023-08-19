@@ -1,5 +1,4 @@
 import { StyleSheet, View } from 'react-native'
-import React from 'react'
 // import MapScreen from './MapScreen';
 import Test from './test';
 
@@ -9,7 +8,7 @@ const App = () => {
       {/* <MapScreen/> */}
       <Test/>
     </View>
-  )
+  );
 }
 
 export default App
