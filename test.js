@@ -7,25 +7,32 @@ const Test = () => {
     const [users, setUsers] = useState([]);
     const todoRef = firebase.firestore().collection('location');
 
-    useEffect(async () => {
-        todoRef
-        .onSnapshot(
-            querySnapshot => {
-                const users = []
-                querySnapshot.forEach((doc) => {
-                    const {title, body} = doc.data()
-                    users.push({
-                        id: doc.id,
-                        title,
-                        body,
+    useEffect(() => {
+        async function fetchData(){
+            todoRef
+            .onSnapshot(
+                querySnapshot => {
+                    const users = []
+                    querySnapshot.forEach((doc) => {
+                        const {title, body} = doc.data()
+                        users.push({
+                            id: doc.id,
+                            title,
+                            body,
+                        })
                     })
-                })
-                setUsers(users)
-            }
-        )
+                    setUsers(users)
+                }
+            )
+
+        }
+        fetchData();
     }, [])
 
 
+
+
+  
 
   return (
     <View style={styles.container} >
