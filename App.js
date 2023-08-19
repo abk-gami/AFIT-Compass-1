@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import MapScreen from './MapScreen';
+// import MapScreen from './MapScreen';
 import Test from './test';
 
 const App = () => {
   return (
     <View style={styles.container}>
-      <MapScreen/>
+      {/* <MapScreen/> */}
       <Test/>
     </View>
   )
