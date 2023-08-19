@@ -40,9 +40,15 @@ const SPACING_FOR_CARD_INSET = width * 0.03 - 10;
 
 
 
+
+
+
+
 export default class MapScreen extends Component {
 
 
+
+  
   
   state = {
     markers: [
@@ -244,23 +250,7 @@ export default class MapScreen extends Component {
     this.index = 0;
     this.animation = new Animated.Value(0);
   }
-  // constructor(props) {
-  //   super(props);
-  //   this.state = {
-  //     location: null,
-  //   };
-  // }
   componentDidMount() {
-      // Request the user's location permissions.
-      // Location.requestForegroundPermissionsAsync().then(response => {
-      //   // Check if the user granted the permissions.
-      //   if (response.status === "granted") {
-      //     // Get the user's current location.
-      //     Location.getCurrentPositionAsync().then(position => {
-      //       this.setState({ location: position });
-      //     });
-      //   }
-      // });
     // We should detect when scrolling has stopped then animate
     // We should just debounce the event listener here
     this.animation.addListener(({ value }) => {
@@ -313,54 +303,9 @@ export default class MapScreen extends Component {
     });
     
 
-    // const userLocation = async () => {
-    //   let { status } = await Location.requestForegroundPermissionsAsync();
-    //   if (status != 'granted'){
-    //      setErrorMsg('Permission to access location was denied');
-    //   }
-    //   let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
-    //   setMapRegion({
-    //     latitude: location.coords.latitude,
-    //     longitude: location.coords.longitude,
-    //     latitudeDelta: 0.015,
-    //     longitudeDelta: 0.0121,
-    //   });
-    //   console.log(location.coords.latitude, location.coords.longitude);
-    // }
-    
-    
-    // useEffect(() => {
-    //   userLocation();
-    // }, []);
-
-    // const [location, setLocation] = useState(null);
-    // const [errorMsg, setErrorMsg] = useState(null);
-  
-    // useEffect(() => {
-    //   (async () => {
-        
-    //     let { status } = await Location.requestForegroundPermissionsAsync();
-    //     if (status !== 'granted') {
-    //       setErrorMsg('Permission to access location was denied');
-    //       return;
-    //     }
-  
-    //     let location = await Location.getCurrentPositionAsync({});
-    //     setLocation(location);
-    //   })();
-    // }, []);
-  
-    // let text = 'Waiting..';
-    // if (errorMsg) {
-    //   text = errorMsg;
-    // } else if (location) {
-    //   text = JSON.stringify(location);
-    // }
     
     return ( 
     <View style={styles.container}>
-      {/* <Text>Hello World</Text> */}
-      {/* <Button title='get Location' onPress={userLocation} style={styles.button}/> */}
       <MapView
   ref={(map) => (this.map = map)}
   initialRegion={this.state.region}
