@@ -7,9 +7,9 @@ import Hehe from './hehe';
 const App = () => {
   return (
     <View style={styles.container}>
-      <MapScreen/>
+      {/* <MapScreen/> */}
       {/* <Test/> */}
-      {/* <Hehe /> */}
+      <Hehe />
     </View>
   );
 }

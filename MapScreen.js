@@ -97,7 +97,7 @@ const ExploreScreen = () => {
     });
   });
 
-  const interpolations = state.markers.map((marker, index) => {
+  const interpolations = markers.map((marker, index) => {
     const inputRange = [
       (index - 1) * CARD_WIDTH,
       index * CARD_WIDTH,
@@ -117,46 +117,47 @@ const ExploreScreen = () => {
     return { scale, opacity };
   });
 
-  const onMarkerPress = (mapEventData) => {
-    const markerID = mapEventData._targetInst.return.key;
+  // const onMarkerPress = (mapEventData) => {
+  //   const markerID = mapEventData._targetInst.return.key;
 
-    let x = (markerID * CARD_WIDTH) + (markerID * 20); 
-    if (Platform.OS === 'ios') {
-      x = x - SPACING_FOR_CARD_INSET;
-    }
+  //   let x = (markerID * CARD_WIDTH) + (markerID * 20); 
+  //   if (Platform.OS === 'ios') {
+  //     x = x - SPACING_FOR_CARD_INSET;
+  //   }
 
-    _scrollView.current.scrollTo({x: x, y: 0, animated: true});
-  }
+  //   _scrollView.current.scrollTo({x: x, y: 0, animated: true});
+  // }
 
   const _map = React.useRef(null);
   const _scrollView = React.useRef(null);
 
+  const [markers, setMarkers] = useState([]);
+    const map =  firebase.firestore().collection('location')
 
-//firebase
-  const [users, setUsers] = useState([]);
-  const todoRef = firebase.firestore().collection('location');
+    useEffect(() => {
+        async function fetchMarkers(){
+            map
+            .onSnapshot(
+                querySnapshot => {
+                    const markers = []
+                    querySnapshot.forEach((doc) => {
+                        const {title, body, other, latitude, longitude} = doc.data()
+                        markers.push({
+                            id: doc.id,
+                            title,
+                            body,
+                            other,
+                            longitude,
+                            latitude,
+                        })
+                    })
+                    setMarkers(markers)
+                }
+            )
+        }
+        fetchMarkers();
+      }, []);
 
-  useEffect(() => {
-      async function fetchData(){
-          todoRef
-          .onSnapshot(
-              querySnapshot => {
-                  const users = []
-                  querySnapshot.forEach((doc) => {
-                      const {title, body} = doc.data()
-                      users.push({
-                          id: doc.id,
-                          title,
-                          body,
-                      })
-                  })
-                  setUsers(users)
-              }
-          )
-
-      }
-      fetchData();
-  }, [])
 
 
 
@@ -172,7 +173,7 @@ const ExploreScreen = () => {
         provider={PROVIDER_GOOGLE}
         mapType={'satellite'} 
         >
-        {state.markers.map((marker, index) => {
+        {markers.map((marker, index) => {
           const scaleStyle = {
             transform: [
               {
@@ -187,8 +188,8 @@ const ExploreScreen = () => {
             <Marker key={index}
              coordinate={marker.coordinate}
             //  onPress={(e)=>onMarkerPress(e)}
-             title={marker.title} 
-             description={marker.description}
+             title={marker.title}
+             description= {marker.body}
              >
               <Animated.View style={[styles.markerWrap, opacityStyle]}>
                 {/* <Animated.Image

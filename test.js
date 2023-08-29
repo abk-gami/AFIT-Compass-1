@@ -14,12 +14,14 @@ const Test = () => {
                 querySnapshot => {
                     const users = []
                     querySnapshot.forEach((doc) => {
-                        const {title, body, other} = doc.data()
+                        const {title, body, other, latitude, longitude} = doc.data()
                         users.push({
                             id: doc.id,
                             title,
                             body,
                             other,
+                            latitude,
+                            longitude,
                         })
                     })
                     setUsers(users)
@@ -49,6 +51,8 @@ const Test = () => {
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.body}>{item.body}</Text>
                     <Text style={styles.body}>{item.other}</Text>
+                    <Text style={styles.body}>{item.latitude}</Text>
+                    <Text style={styles.body}>{item.longitude}</Text>
 
                 </View>
             </Pressable>
