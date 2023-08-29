@@ -1,6 +1,7 @@
-import { StyleSheet, View } from 'react-native'
-import MapScreen from './MapScreen';
+
+  import { StyleSheet, View } from 'react-native'
 // import Test from './test';
+import MapScreen from './MapScreen';
 
 const App = () => {
   return (
@@ -19,6 +20,3 @@ const styles = StyleSheet.create({
   },
 
 })
-
-
-
