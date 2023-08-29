@@ -14,11 +14,12 @@ const Test = () => {
                 querySnapshot => {
                     const users = []
                     querySnapshot.forEach((doc) => {
-                        const {title, body} = doc.data()
+                        const {title, body, other} = doc.data()
                         users.push({
                             id: doc.id,
                             title,
                             body,
+                            other,
                         })
                     })
                     setUsers(users)
@@ -47,6 +48,7 @@ const Test = () => {
                 <View style={styles.innerContainer}>
                     <Text style={styles.title}>{item.title}</Text>
                     <Text style={styles.body}>{item.body}</Text>
+                    <Text style={styles.body}>{item.other}</Text>
 
                 </View>
             </Pressable>
