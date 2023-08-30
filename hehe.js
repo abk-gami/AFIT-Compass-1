@@ -6,18 +6,18 @@ import {firebase} from './config';
 
 
 const Hehe = () => {
-  const [markers, setMarkers] = useState([]);
-    const map =  firebase.firestore().collection('location')
+  const [points, setPoints] = useState([]);
+    const places =  firebase.firestore().collection('location')
 
     useEffect(() => {
         async function fetchMarkers(){
-            map
+            places
             .onSnapshot(
                 querySnapshot => {
-                    const markers = []
+                    const points = []
                     querySnapshot.forEach((doc) => {
                         const {title, body, other, latitude, longitude} = doc.data()
-                        markers.push({
+                        points.push({
                             id: doc.id,
                             title,
                             body,
@@ -26,7 +26,7 @@ const Hehe = () => {
                             latitude,
                         })
                     })
-                    setMarkers(markers)
+                    setPoints(points)
                 }
             )
         }
@@ -72,7 +72,7 @@ const Hehe = () => {
         showsUserLocation
         style={{ flex: 1 }}
       >
-        {markers.map(marker => (
+        {points.map(marker => (
           <Marker
             coordinate={{ 
                 latitude: marker.latitude,
