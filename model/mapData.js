@@ -97,8 +97,8 @@ const mapData = () => {
     },
     {
       coordinate: {
-        latitude:    10.617776, 
-        longitude:    7.443347,  
+        latitude:    10.617582998928897, 
+        longitude:    7.443476249157613, 
       },
       title: 'Boys Hostel',
       description: 'Boys Hostel',
