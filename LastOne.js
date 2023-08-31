@@ -30,6 +30,34 @@ const SPACING_FOR_CARD_INSET = width * 0.1 - 10;
 
 const ExploreScreen = () => {
   // const theme = useTheme();
+  const [points, setPoints] = useState([]);
+    const places =  firebase.firestore().collection('location')
+
+    useEffect(() => {
+      async function fetchMarkers(){
+          places
+          .onSnapshot(
+              querySnapshot => {
+                  const points = []
+                  querySnapshot.forEach((doc) => {
+                      const {title, body, other, latitude, longitude} = doc.data()
+                      points.push({
+                          id: doc.id,
+                          title,
+                          body,
+                          other,
+                          longitude,
+                          latitude,
+                      })
+                  })
+                  setPoints(points)
+              }
+          )
+      }
+      fetchMarkers();
+    }, []);
+
+
 
   const initialMapState = {
     markers,
@@ -130,13 +158,6 @@ const ExploreScreen = () => {
 
   const _map = React.useRef(null);
   const _scrollView = React.useRef(null);
-
-
-
-
-
-
-
 
 
   return (
@@ -361,19 +382,23 @@ const styles = StyleSheet.create({
     // height:34,
   },
   marker: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    backgroundColor: "red",
+    // width: 8,
+    // height: 8,
+    // borderRadius: 4,
+    // backgroundColor: "red",
+    width: 30,
+    height: 30,
+    borderRadius: 15,
+    backgroundColor: "#ff000092",
   },
   ring: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: "rgba(130,4,150, 0.3)",
-    position: "absolute",
-    borderWidth: 1,
-    borderColor: "rgba(130,4,150, 0.5)",
+    // width: 24,
+    // height: 24,
+    // borderRadius: 12,
+    // backgroundColor: "rgba(130,4,150, 0.3)",
+    // position: "absolute",
+    // borderWidth: 1,
+    // borderColor: "rgba(130,4,150, 0.5)",
   },
   button: {
     alignItems: 'center',
