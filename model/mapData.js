@@ -7,6 +7,8 @@ const Images = [
     { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/yisa doko.jpg?raw=true" },
     { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/alpha hall.jpg?raw=true" },
     { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/afit img.jpg?raw=true" },
+    { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/girls hostel.jpg?raw=true" },
+    { uri: "https://github.com/abk-gami/AFIT-mobile-img/blob/main/boys hostel.jpg?raw=true" },
 ];
 
 
@@ -31,9 +33,9 @@ const mapData = () => {
       image: Images[0],
     },
     {
-      coordinate: {
-        latitude: 10.608165678198482,
-        longitude:   7.439113428898723,
+      coordinate: { 
+        latitude:     10.608142947760621,
+        longitude:    7.439118488008261,
       },
       title: 'AFIT Gate',
       description: 'Make sure you hold your I.D card',
@@ -68,8 +70,17 @@ const mapData = () => {
     },
     {
       coordinate: {
-        latitude:     10.612931, 
-        longitude:    7.445999, 
+        latitude:    10.609497054892023, 
+        longitude:     7.441556290899769,  
+      },
+      title: 'AFIT Masjid',
+      description: 'Mosque',
+      image: Images[4],
+    },
+    {
+      coordinate: {
+        latitude:     10.612929900889057, 
+        longitude:    7.446031368883489,
       },
       title: 'AFIT Clinic',
       description: 'Sick Bay for ill students',
@@ -82,7 +93,7 @@ const mapData = () => {
       },
       title: 'Girls Hostel',
       description: 'Girls Hostel',
-      image: Images[4],
+      image: Images[5],
     },
     {
       coordinate: {
@@ -91,7 +102,7 @@ const mapData = () => {
       },
       title: 'Boys Hostel',
       description: 'Boys Hostel',
-      image: Images[4],
+      image: Images[6],
     },
   ];
 
