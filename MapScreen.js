@@ -295,7 +295,8 @@ const styles = StyleSheet.create({
   },
   searchBox: {
     position:'absolute', 
-    marginTop: Platform.OS === 'ios' ? 40 : 30, 
+    // marginTop: Platform.OS === 'ios' ? 40 : 30,
+    marginTop: 10,
     flexDirection:"row",
     backgroundColor: '#fff',
     width: '30%',
