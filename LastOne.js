@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+6import React, { useState, useEffect } from 'react';
 import {
   StyleSheet,
   Text,
@@ -63,7 +63,7 @@ const ExploreScreen = () => {
     markers,
     categories: [
       { 
-        name: 'Fastfood C', 
+        name: 'Fastfood ', 
         icon: <MaterialCommunityIcons style={styles.chipsIcon} name="food-fork-drink" size={18} />,
       },
       {
