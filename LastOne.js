@@ -63,7 +63,7 @@ const ExploreScreen = () => {
     markers,
     categories: [
       { 
-        name: 'Fastfood Cer', 
+        name: 'Fastfood Ce', 
         icon: <MaterialCommunityIcons style={styles.chipsIcon} name="food-fork-drink" size={18} />,
       },
       {
